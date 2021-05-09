@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+import { RepositoriesContext } from './AppContainer';
+
 function App() {
+  const { fetchRepositories } = useContext(RepositoriesContext);
+
+  useEffect(() => {
+    fetchRepositories('q');
+  }, [fetchRepositories]);
+
   return (
     <div className="App">
       <header className="App-header">
