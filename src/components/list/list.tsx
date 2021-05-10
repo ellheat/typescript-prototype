@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { ListItem } from "../listItem/listItem";
+import { ListItem } from '../listItem';
 import { IList, IRepository } from '../../hooks/useRepositories';
 
 
@@ -19,6 +19,7 @@ export const List: FC<IList> = ({ repositories }) => {
         <tbody>
           {repositories?.map((repository: IRepository, key: number) =>
             <ListItem
+              key={repository.id}
               id={repository.id}
               name={repository.name}
               owner={repository.owner.login}

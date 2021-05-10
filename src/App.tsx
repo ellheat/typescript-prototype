@@ -1,23 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 
 
 import { RepositoriesContext } from './AppContainer';
-import { List } from "./components/list/list";
+import { List } from './components/list';
+import { SearchField } from './components/searchField';
+import { useSearch } from './hooks/useSearch';
 
 function App() {
-  const { repositories, fetchRepositories } = useContext(RepositoriesContext);
-  console.log('repositories', repositories);
-
-  useEffect(() => {
-    fetchRepositories('q');
-  }, [fetchRepositories]);
+  const { repositories, isLoading } = useContext(RepositoriesContext);
+  const [{ searchValue }, { handleChangeSearchValue }] = useSearch();
 
   return (
     <div className="App">
+      <SearchField id="searchField" name="searchField" onChange={handleChangeSearchValue} label="Search" value={searchValue} />
       {
-        // @ts-ignore
-        <List repositories={repositories} />
+        !isLoading ?
+          // @ts-ignore
+          <List repositories={repositories} />
+        :
+          'Loading...'
       }
     </div>
   );

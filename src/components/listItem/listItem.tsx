@@ -8,8 +8,8 @@ interface Props {
   createdAt: Date,
 }
 
-export const ListItem: FC<Props> = ({ id, name, owner, stars, createdAt }) => (
-  <tr key={id}>
+export const ListItem: FC<Props> = ({ name, owner, stars, createdAt }) => (
+  <tr>
     <td>{name}</td>
     <td>{owner}</td>
     <td>{stars}</td>
