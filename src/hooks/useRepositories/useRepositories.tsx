@@ -1,9 +1,10 @@
 import { useCallback, useState} from "react";
 
 import { URL } from './useRepositories.constants';
+import { IList } from './useRepositories.constants';
 
 interface IRepositories {
-  repositories: readonly[],
+  repositories: IList,
 }
 
 export const useRepositories = () => {

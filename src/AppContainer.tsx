@@ -2,16 +2,17 @@ import React, { createContext } from 'react';
 
 import App from './App';
 
-import { useRepositories } from './hooks/useRepositories';
+import { IList, useRepositories } from './hooks/useRepositories';
 
 type FetchRepositoriesType = (query?: string) => void;
 
 interface RepositoriesContextInterface {
-  repositories: readonly object[] | [];
+  repositories: IList;
   fetchRepositories: FetchRepositoriesType;
 }
 
 export const RepositoriesContext = createContext<RepositoriesContextInterface>({
+// @ts-ignore
   repositories: [],
   fetchRepositories: () => {},
 });

@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 
 import { RepositoriesContext } from './AppContainer';
+import { List } from "./components/list/list";
 
 function App() {
-  const { fetchRepositories } = useContext(RepositoriesContext);
+  const { repositories, fetchRepositories } = useContext(RepositoriesContext);
+  console.log('repositories', repositories);
 
   useEffect(() => {
     fetchRepositories('q');
@@ -14,20 +15,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {
+        // @ts-ignore
+        <List repositories={repositories} />
+      }
     </div>
   );
 }
