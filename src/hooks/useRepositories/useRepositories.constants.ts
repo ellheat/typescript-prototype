@@ -1,4 +1,5 @@
 export const URL = 'https://api.github.com/search/repositories';
+export const LIMIT = 20;
 
 interface IOwner {
   login: string,
@@ -13,5 +14,5 @@ export interface IRepository {
 }
 
 export interface IList {
-  repositories: IRepository[] | undefined,
+  repositories: IRepository[],
 }

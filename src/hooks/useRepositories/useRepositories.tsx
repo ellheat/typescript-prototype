@@ -1,25 +1,26 @@
-import { useCallback, useState} from "react";
+import { useState } from 'react';
 
-import { URL } from './useRepositories.constants';
-import { IList } from './useRepositories.constants';
+import { URL, LIMIT, IRepository } from './useRepositories.constants';
 
-interface IRepositories {
-  repositories: IList,
-}
+export type FetchRepositoriesType = (query: string, page?: number) => void
+type UseRepositoriesResult = [
+  { repositories: IRepository[], isLoading: boolean },
+  { fetchRepositories: FetchRepositoriesType}
+]
 
-export const useRepositories = () => {
-  const [repositories, setRepositories] = useState<IRepositories>();
+export const useRepositories: () => UseRepositoriesResult = () => {
+  const [repositories, setRepositories] = useState<IRepository[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchRepositories = useCallback(query => {
+  const fetchRepositories: FetchRepositoriesType = (query, page= 1) => {
     setIsLoading(true);
-    fetch(`${URL}?q=${query}`)
+    fetch(`${URL}?q=${query}&page=${page}&per_page=${LIMIT}`)
       .then(response => response.json())
       .then(parsedResponse => {
         setRepositories(parsedResponse.items)
         setIsLoading(false)
       });
-  }, []);
+  };
 
   return [
     {

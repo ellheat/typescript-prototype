@@ -2,19 +2,18 @@ import React, { createContext } from 'react';
 
 import App from './App';
 
-import { IList, useRepositories } from './hooks/useRepositories';
+import { IRepository, useRepositories } from './hooks/useRepositories';
+import { FetchRepositoriesType } from './hooks/useRepositories/useRepositories';
 
-type FetchRepositoriesType = (query?: string) => void;
 type IsLoadingType = boolean;
 
 interface RepositoriesContextInterface {
-  repositories: IList;
+  repositories: IRepository[];
   isLoading: IsLoadingType;
   fetchRepositories: FetchRepositoriesType;
 }
 
 export const RepositoriesContext = createContext<RepositoriesContextInterface>({
-// @ts-ignore
   repositories: [],
   isLoading: false,
   fetchRepositories: () => {},
@@ -30,15 +29,14 @@ export const AppContainer = () => {
       fetchRepositories,
     }] = useRepositories();
 
-  const context = {
+  const repositoriesContext = {
     repositories,
     isLoading,
     fetchRepositories,
   }
 
   return (
-    // @ts-ignore
-    <RepositoriesContext.Provider value={context}>
+    <RepositoriesContext.Provider value={repositoriesContext}>
       <App />
     </RepositoriesContext.Provider>
   )
