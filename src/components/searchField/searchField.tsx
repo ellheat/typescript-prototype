@@ -1,4 +1,6 @@
-import React, { FC } from "react";
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+
 
 interface Props {
   id: string,
@@ -8,19 +10,6 @@ interface Props {
   onChange: any,
 }
 
-export const SearchField: FC<Props> = ({ id, name, label, value, onChange }) => (
-  <div>
-    <label htmlFor={id}>
-      {label}
-    </label>
-    <input
-      type="text"
-      className="form-control"
-      id={id}
-      name={name}
-      placeholder={label}
-      value={value || ''}
-      onChange={onChange}
-    />
-  </div>
+export const SearchField = ({ id, name, label, value, onChange }: Props) => (
+  <TextField id={id} label={label} name={name} onChange={onChange} value={value} />
 )

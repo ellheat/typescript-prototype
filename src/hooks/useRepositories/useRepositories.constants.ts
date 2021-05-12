@@ -1,5 +1,5 @@
 export const URL = 'https://api.github.com/search/repositories';
-export const LIMIT = 20;
+export const LIMIT = 10;
 
 interface IOwner {
   login: string,

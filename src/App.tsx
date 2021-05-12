@@ -3,7 +3,7 @@ import './App.css';
 
 import { RepositoriesContext } from './AppContainer';
 
-import { List } from './components/list';
+import { RepositoriesTable } from './components/repositoriesTable';
 import { SearchField } from './components/searchField';
 import { Pagination } from './components/pagination';
 
@@ -21,11 +21,13 @@ function App() {
       <SearchField id="searchField" name="searchField" onChange={handleChangeSearchValue} label="Search" value={searchValue} />
       {
         !isLoading ?
-          <>
-            <List repositories={repositories} />
-            <Pagination page={page} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} />
-          </>
-        :
+          repositories.length > 0 && (
+            <>
+              <RepositoriesTable repositories={repositories} />
+              <Pagination page={page} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} />
+            </>
+          )
+          :
           'Loading...'
       }
     </div>

@@ -11,19 +11,19 @@ type PaginationProps = {
 export const Pagination = ({ page, handlePrevPage, handleNextPage }: PaginationProps) => {
   return (
     <nav aria-label="Table pagination">
-      <ul className="pagination">
-        <li className="page-item" onClick={handlePrevPage}>
-          <a className="page-link" href="#" aria-label="Previous">
-            <span className="sr-only">Previous</span>
-          </a>
+      <ul>
+        <li onClick={handlePrevPage}>
+          <div aria-label="Previous">
+            <span>Previous</span>
+          </div>
         </li>
-        <li className="page-item">
+        <li>
           {page}
         </li>
-        <li className="page-item" onClick={handleNextPage}>
-          <a className="page-link" href="#" aria-label="Next">
-            <span className="sr-only">Next</span>
-          </a>
+        <li onClick={handleNextPage}>
+          <div aria-label="Next">
+            <span>Next</span>
+          </div>
         </li>
       </ul>
     </nav>

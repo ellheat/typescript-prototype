@@ -1,0 +1,1 @@
+export { RepositoriesTable } from './repositoriesTable'
