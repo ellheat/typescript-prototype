@@ -16,3 +16,10 @@ export interface IRepository {
 export interface IList {
   repositories: IRepository[],
 }
+
+export enum FETCH_STATUS {
+  idle = 'idle',
+  loading = 'loading',
+  success = 'success',
+  error = 'error',
+}

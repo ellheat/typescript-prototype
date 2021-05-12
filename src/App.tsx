@@ -1,35 +1,22 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
 import './App.css';
 
-import { RepositoriesContext } from './AppContainer';
-
 import { RepositoriesTable } from './components/repositoriesTable';
-import { SearchField } from './components/searchField';
-import { Pagination } from './components/pagination';
 
 import { useSearch } from './hooks/useSearch';
-import { usePagination } from './hooks/usePagination';
+import { FETCH_STATUS, useRepositories } from './hooks/useRepositories';
 
 
 function App() {
-  const { repositories, isLoading } = useContext(RepositoriesContext);
   const [{ searchValue }, { handleChangeSearchValue }] = useSearch();
-  const [{ page }, { handlePrevPage, handleNextPage }] = usePagination(searchValue);
+  const { status, repositories } = useRepositories(searchValue, 1);
 
   return (
     <div className="App">
-      <SearchField id="searchField" name="searchField" onChange={handleChangeSearchValue} label="Search" value={searchValue} />
-      {
-        !isLoading ?
-          repositories.length > 0 && (
-            <>
-              <RepositoriesTable repositories={repositories} />
-              <Pagination page={page} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage} />
-            </>
-          )
-          :
-          'Loading...'
-      }
+      <TextField id="searchField" label="Search" name="searchField" onChange={handleChangeSearchValue} value={searchValue} />
+      { status === FETCH_STATUS.loading && 'Loading...' }
+      { status === FETCH_STATUS.success && <RepositoriesTable repositories={repositories} /> }
     </div>
   );
 }

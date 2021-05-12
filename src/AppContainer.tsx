@@ -1,43 +1,16 @@
-import React, { createContext } from 'react';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 import App from './App';
 
-import { IRepository, useRepositories } from './hooks/useRepositories';
-import { FetchRepositoriesType } from './hooks/useRepositories/useRepositories';
-
-type IsLoadingType = boolean;
-
-interface RepositoriesContextInterface {
-  repositories: IRepository[];
-  isLoading: IsLoadingType;
-  fetchRepositories: FetchRepositoriesType;
-}
-
-export const RepositoriesContext = createContext<RepositoriesContextInterface>({
-  repositories: [],
-  isLoading: false,
-  fetchRepositories: () => {},
-});
-
 export const AppContainer = () => {
-  const [
-    {
-      repositories,
-      isLoading,
-    },
-    {
-      fetchRepositories,
-    }] = useRepositories();
-
-  const repositoriesContext = {
-    repositories,
-    isLoading,
-    fetchRepositories,
-  }
+  const queryClient = new QueryClient();
 
   return (
-    <RepositoriesContext.Provider value={repositoriesContext}>
+    <QueryClientProvider client={queryClient}>
       <App />
-    </RepositoriesContext.Provider>
+      <ReactQueryDevtools initialIsOpen />
+    </QueryClientProvider>
   )
 }

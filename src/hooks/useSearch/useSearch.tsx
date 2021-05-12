@@ -1,20 +1,17 @@
-import { useState, useContext, FormEvent } from 'react';
-import { RepositoriesContext } from '../../AppContainer';
+import { useState, ChangeEvent } from 'react';
 
-export type HandleChangeValue = (event: FormEvent<HTMLInputElement>) => void
+export type HandleChangeValue = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 type UseSearchResult = [
   { searchValue: string },
   { handleChangeSearchValue: HandleChangeValue}
 ]
 
 export const useSearch: () => UseSearchResult = () => {
-  const { fetchRepositories } = useContext(RepositoriesContext);
   const [value, setValue] = useState<string>('');
 
   const handleChangeValue: HandleChangeValue = (event) => {
     const newValue = event.currentTarget.value;
     setValue(newValue);
-    fetchRepositories(newValue);
   };
 
   return [

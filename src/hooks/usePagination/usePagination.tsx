@@ -1,5 +1,4 @@
-import { SyntheticEvent, useContext, useEffect, useState } from "react";
-import { RepositoriesContext } from '../../AppContainer';
+import { SyntheticEvent, useEffect, useState } from 'react';
 
 export type HandleChangePageOnClick = (event: SyntheticEvent) => void
 type HandleChangePage = (page: number) => void
@@ -14,7 +13,6 @@ type UsePaginationResult = [
 ]
 
 export const usePagination: (searchValue: string) => UsePaginationResult = (searchValue) => {
-  const { fetchRepositories } = useContext(RepositoriesContext);
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
@@ -23,7 +21,6 @@ export const usePagination: (searchValue: string) => UsePaginationResult = (sear
 
   const handleChangePage: HandleChangePage = (page) => {
     setPage(page);
-    fetchRepositories(searchValue, page);
   }
 
   const handlePrevPage: HandleChangePageOnClick = () => handleChangePage(page - 1);
