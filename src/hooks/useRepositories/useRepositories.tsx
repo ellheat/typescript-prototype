@@ -3,8 +3,17 @@ import axios from 'axios';
 
 import { URL, LIMIT } from './useRepositories.constants';
 
-type FetchRepositoriesType = Promise<{ items: [], total_count: number, incomplete_results: boolean }>
-type UseRepositoriesResult = { status: string, pagesCount: number, repositories: [], error: unknown }
+type DataModel = {
+  items: [],
+  total_count: number,
+  incomplete_results: boolean
+}
+type FetchRepositoriesType = Promise<DataModel>
+type UseRepositoriesResult = {
+  status: string,
+  pagesCount: number,
+  repositories: [],
+}
 
 
 const fetchRepositories: (query: string, page?: number) => FetchRepositoriesType = async (query, page= 1) => {
@@ -13,7 +22,7 @@ const fetchRepositories: (query: string, page?: number) => FetchRepositoriesType
 };
 
 export const useRepositories: (query: string, page: number) => UseRepositoriesResult = (query, page) => {
-  const { status, data, error } = useQuery(
+  const { status, data } = useQuery<DataModel>(
     ['repositories', query, page],
     () => fetchRepositories(query, page),
     {
@@ -29,6 +38,5 @@ export const useRepositories: (query: string, page: number) => UseRepositoriesRe
     status,
     pagesCount: totalCount <= LIMIT ? 1 : Math.ceil(totalCount / LIMIT),
     repositories: data?.items || [],
-    error,
   };
 }

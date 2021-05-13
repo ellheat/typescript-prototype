@@ -15,8 +15,6 @@ function App() {
   const [{ page }, { handleChangePage }] = usePagination(searchValue);
   const { status, pagesCount, repositories } = useRepositories(searchValue, page);
 
-  console.log('status', status);
-
   return (
     <div className="App">
       <TextField id="searchField" label="Search" name="searchField" onChange={handleChangeSearchValue} value={searchValue} />
@@ -27,6 +25,7 @@ function App() {
           <Pagination count={pagesCount} color="primary" page={page} onChange={handleChangePage}  />
         </>
       ) }
+      { status === FETCH_STATUS.error && 'Something went wrong' }
     </div>
   );
 }
