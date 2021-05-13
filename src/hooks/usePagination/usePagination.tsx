@@ -1,14 +1,12 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
-export type HandleChangePageOnClick = (event: SyntheticEvent) => void
-type HandleChangePage = (page: number) => void
+type HandleChangePageProps = (event: ChangeEvent<unknown>, page: number) => void
 type UsePaginationResult = [
   {
     page: number
   },
   {
-    handlePrevPage: HandleChangePageOnClick,
-    handleNextPage: HandleChangePageOnClick
+    handleChangePage: HandleChangePageProps,
   }
 ]
 
@@ -19,21 +17,16 @@ export const usePagination: (searchValue: string) => UsePaginationResult = (sear
     setPage(1);
   }, [searchValue]);
 
-  const handleChangePage: HandleChangePage = (page) => {
+  const handleChangePage: HandleChangePageProps = (event, page) => {
     setPage(page);
   }
-
-  const handlePrevPage: HandleChangePageOnClick = () => handleChangePage(page - 1);
-
-  const handleNextPage: HandleChangePageOnClick = () => handleChangePage(page + 1);
 
   return [
     {
       page
     },
     {
-      handlePrevPage,
-      handleNextPage,
+      handleChangePage,
     },
   ]
 };
