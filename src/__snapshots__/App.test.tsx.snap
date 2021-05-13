@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App: Component should render correctly 1`] = `
+<div>
+  <div
+    class="sc-bdnxRM iiGFbS"
+  >
+    <h1
+      class="sc-gtsrHT"
+    >
+      Search Repo from GitHub
+    </h1>
+    <div
+      class="MuiFormControl-root MuiTextField-root sc-dlnjwi DTPRZ"
+    >
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated"
+        data-shrink="false"
+        for="searchField"
+        id="searchField-label"
+      >
+        Search
+      </label>
+      <div
+        class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiInput-input"
+          id="searchField"
+          name="searchField"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <p
+      class="sc-eCApnc cDHgXe"
+    >
+      Type to find repo
+    </p>
+  </div>
+</div>
+`;
