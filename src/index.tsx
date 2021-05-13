@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { AppContainer } from './AppContainer';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import reportWebVitals from './reportWebVitals';
+import { GlobalStyle } from './index.styles';
+import App from './App';
+
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppContainer />
+    <GlobalStyle />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
